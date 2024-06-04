@@ -1,0 +1,9 @@
+package mars_message;
+
+struct Orders
+{
+    DateTime robotTime; 
+    int8_t timezone;
+    int32_t num;
+    Order orders[num];
+}

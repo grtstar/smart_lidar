@@ -1,0 +1,15 @@
+package mars_message;
+
+struct PartsLifeConfig
+{
+    int16_t sideBrushLife;
+    int16_t sideBrushLifeMax;
+    int16_t mainBrushLife;
+    int16_t mainBrushLifeMax;
+    int16_t rollBrushLife;
+    int16_t rollBrushLifeMax;
+    int16_t hiparLife;
+    int16_t hiparLifeMax;
+    int16_t ragLife;
+    int16_t ragLifeMax;
+}

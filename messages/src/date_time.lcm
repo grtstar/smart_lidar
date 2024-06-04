@@ -1,0 +1,12 @@
+package mars_message;
+
+struct DateTime
+{
+    int32_t year;
+    int32_t month;
+    int32_t day;
+    int32_t weekday;
+    int8_t hour;
+    int8_t minute;
+    int8_t second;
+}

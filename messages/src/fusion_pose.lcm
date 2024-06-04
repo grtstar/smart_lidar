@@ -1,0 +1,8 @@
+package mars_message;
+
+struct FusionPose
+{
+    int64_t timetickMs;
+    Pose pose;
+    float rawYaw;
+}

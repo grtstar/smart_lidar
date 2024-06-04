@@ -1,0 +1,9 @@
+package mars_message;
+
+struct RobotStatus
+{
+    int8_t battLevel;
+    int8_t battStatus;
+    int32_t error;
+    int8_t carpet;
+} 

@@ -1,0 +1,16 @@
+package mars_message;
+
+struct AppMisc
+{
+    int8_t verison;
+    int8_t enableNotDisturbTime;
+    int8_t volume;
+    int8_t enableContinueClean;
+    int8_t language;
+    int8_t dustCollctionNum;
+    int8_t enbaleCustomizeMode;
+    int8_t unitSet;
+    int8_t carpetCleanPrefer;
+    int8_t enableAutoBoost;
+    int8_t enableChildLock;
+}

@@ -1,0 +1,7 @@
+package mars_message;
+
+struct Polygon
+{
+    int8_t count;
+    Point vetex[count];
+}

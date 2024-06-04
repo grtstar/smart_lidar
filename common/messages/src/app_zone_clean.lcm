@@ -1,0 +1,17 @@
+package mars_message;
+
+struct AppZoneClean
+{
+    int8_t version;
+    int8_t count;
+    Polygon zone[count];
+    string name[count];
+    int32_t zoneID[count];
+    int8_t localSave[count];
+    int8_t type[count];
+    int8_t mode[count];
+    int8_t suction[count];
+    int8_t cistern[count];
+    int8_t cleanRepeat[count];
+    int8_t order[count];
+}

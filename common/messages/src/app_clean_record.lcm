@@ -1,0 +1,12 @@
+package mars_message;
+
+struct AppCleanRecord
+{
+    int16_t recordId;
+    int32_t cleanTimeSecond;
+    float cleanArea;
+    int8_t cleanMode;
+    int8_t cleanMethod;
+    int8_t finishResult;
+    int8_t startReason;
+}

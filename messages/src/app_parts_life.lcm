@@ -1,0 +1,9 @@
+package mars_message;
+
+struct AppPartsLife
+{
+    int16_t edgeBrushLifeMinutes;
+    int16_t mainBrushLifeMinutes;
+    int16_t haipaLifeMinutes;
+    int16_t ragLifeMinutes;
+}

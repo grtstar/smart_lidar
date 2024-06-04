@@ -1,0 +1,8 @@
+package mars_message;
+
+struct IrCode
+{
+    int64_t timestampMs;
+    int8_t  count;
+    int8_t  code[count];
+}

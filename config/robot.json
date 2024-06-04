@@ -1,0 +1,12 @@
+{
+    "vmax": 0.3,
+    "vamax": 3,
+    "naviV": 0.25,
+    "wmax": 150,
+    "wamax": 300,
+    "wmin": 15,
+    "radius": 0.164,
+    "L": 0.22,
+    "CodeLen": 0.001,
+    "frontPoint": 0.33
+}

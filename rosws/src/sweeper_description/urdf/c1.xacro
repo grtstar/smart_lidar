@@ -1,0 +1,403 @@
+<?xml version="1.0"?>
+<robot xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller" xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor" xmlns:xacro="http://ros.org/wiki/xacro" name="rvc">
+  <xacro:property name="PI" value="3.14159" />
+  <xacro:property name="body_radius" value="0.17" />
+  <xacro:property name="body_height" value="0.07" />
+  <xacro:property name="body_to_ground" value="0.01" />
+  <xacro:property name="wheel_radius" value="0.033" />
+  <xacro:property name="wheel_width" value="0.016" />
+  <xacro:property name="wheel_L" value="0.26" />
+  <xacro:macro name="cylinder_inertial" params="mass radius length heart">
+    <inertial>
+      <origin xyz="${heart}" rpy="0 0 0" />
+      <mass value="${mass}" />
+      <inertia ixx="${mass * (3 * radius * radius + length * length) / 12}" ixy="0.0" ixz="0.0" iyy="${mass * (3 * radius * radius + length * length) / 12}" iyz="0.0" izz="${mass * radius * radius / 2}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="sphere_inertia" params="m r">
+    <inertial>
+      <mass value="${m}"/>
+      <inertia ixx="${2*m*r*r/5}" ixy = "0" ixz = "0" iyy="${2*m*r*r/5}" iyz = "0" izz="${2*m*r*r/5}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="wheel" params="prefix reflect">
+    <link name="${prefix}_wheel">
+      <collision name="${prefix}_wheel_collision">
+        <origin xyz="0 0 0" rpy="0 1.570700 1.570700"/>
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+        </geometry>
+                <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>0</mu2>
+            <fdir1>0 1.0 0</fdir1>
+            <implicit_spring_damper>true</implicit_spring_damper>
+          </ode>
+        </friction>
+      </surface>
+      </collision>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 1.570700 1.570700" />
+        <geometry>
+          <mesh filename="package://sweeper_description/meshes/RobotWheel.dae" />
+        </geometry>
+      </visual>
+      <xacro:cylinder_inertial mass="0.2" radius="${wheel_radius}" length="${wheel_width}" heart="0 0 0" />
+      
+
+    </link>
+    <joint name="${prefix}_wheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="${prefix}_wheel"/>
+      <axis xyz="0 1 0" rpy="0 0 0"/>
+      <origin xyz="0 ${reflect * wheel_L / 2} ${wheel_radius}" rpy="0 0 0"/>
+    </joint>
+
+    <transmission name="${prefix}_wheel_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="${prefix}_wheel_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="${prefix}_wheel_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+    
+    <gazebo reference="${prefix}_wheel">
+      <mu1>800.0</mu1>
+      <mu2>400.0</mu2>
+      <kp>10000000.0</kp>
+      <kd>10.0</kd>
+      <fdir1>1 0 0</fdir1>
+      <maxVel>1.0</maxVel>
+      <minDepth>0.00</minDepth>
+      <material>Gazebo/Black</material>
+    </gazebo>
+
+  </xacro:macro>
+  <link name="base_link"></link>
+  <link name="body">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://sweeper_description/meshes/RobotBody.dae" />
+      </geometry>
+      <material name="white" />
+    </visual>
+    <collision name="boby_collision">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="${body_height}" radius="${body_radius}" />
+      </geometry>
+    </collision>
+
+    <!-- <collision name="back_omniwheel">
+      <origin xyz="-0.11 0 ${-body_height/2}" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="${body_to_ground}"/>
+      </geometry>
+    </collision> -->
+    <xacro:cylinder_inertial mass="0.4" radius="${body_radius}" length="${body_height}" heart="0 0 0"/>
+  </link>
+
+  <joint name="body_to_base" type="fixed">
+    <axis rpy="0 0 0" xyz="0 0 0" />
+    <parent link="base_link" />
+    <child link="body" />
+    <origin xyz="0 0 ${body_to_ground + body_height / 2}" rpy="0 0 0" />
+  </joint>
+
+  <gazebo reference="body">
+    <sensor name="main_bumper" type="contact">
+      <contact>
+        <collision>base_link_fixed_joint_lump__boby_collision_collision</collision>
+      </contact>
+      <plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+        <selfCollide>true</selfCollide>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>20.0</updateRate>
+        <bumperTopicName>/bumper</bumperTopicName>
+        <frameName>base_link</frameName>
+      </plugin>
+    </sensor>
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <link name="front_omni">
+    <xacro:sphere_inertia m="0.1" r="${body_to_ground}"/>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="${body_to_ground}"/>
+      </geometry>
+    </visual>
+    <collision name="front_omniwheel">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="${body_to_ground}"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="front_omni_to_base" type="continuous">
+    <parent link="body"/>
+    <child link="front_omni"/>
+    <origin xyz="0.11 0 -${body_to_ground+body_height/2-body_to_ground}" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+  </joint>
+  <gazebo reference="front_omni">
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>10000000.0</kp>
+    <kd>10.0</kd>
+    <fdir1>1 0 0</fdir1>
+    <maxVel>1.0</maxVel>
+    <minDepth>0.00</minDepth>
+    <turnGravityOff>false</turnGravityOff>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <link name="back_omni">
+    <xacro:sphere_inertia m="0.1" r="${body_to_ground}"/>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="${body_to_ground}"/>
+      </geometry>
+    </visual>
+    <collision name="back_omniwheel">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="${body_to_ground}"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="back_omni_to_base" type="continuous">
+    <parent link="body"/>
+    <child link="back_omni"/>
+    <origin xyz="-0.11 0 -${body_to_ground+body_height/2-body_to_ground}" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+  </joint>
+  <gazebo reference="back_omni">
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>10000000.0</kp>
+    <kd>10.0</kd>
+    <fdir1>1 0 0</fdir1>
+    <maxVel>1.0</maxVel>
+    <minDepth>0.00</minDepth>
+    <turnGravityOff>false</turnGravityOff>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+
+  <!-- <link name="back_omni">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0.001" ixz="0.001" iyy="0.001" iyz="0.001" izz="0.001"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="${body_to_ground}"/>
+      </geometry>
+    </visual>
+    <collision name="back_omniwheel">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="${body_to_ground}"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="back_omni_to_base" type="fixed">
+    <parent link="base_link"/>
+    <child link="back_omni"/>
+    <origin xyz="-0.11 0 -${body_to_ground+body_height/2-body_to_ground}" rpy="0 0 0"/>
+  </joint> -->
+
+  <xacro:macro name="ir_recevier" params="prefix angle color">
+    <link name="ir_recevier_${prefix}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <sphere radius="0.005" />
+        </geometry>
+      </visual>
+    </link>
+    <joint name="ir_recevier_${prefix}_joint" type="fixed">
+      <axis rpy="0 0 0" xyz="0 0 0" />
+      <parent link="body" />
+      <child link="ir_recevier_${prefix}" />
+      <origin xyz="${(body_radius-0.003) * cos(angle)} ${(body_radius-0.003) * sin(angle)} 0.015" rpy="0 0 ${angle}" />
+    </joint>
+    <gazebo reference="ir_recevier_${prefix}">
+      <material>${color}</material>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="scan1d" params="prefix angle">
+    <link name="scan1d_${prefix}">
+    </link>
+    <joint name="scan1d_${prefix}_joint" type="fixed">
+      <parent link="base_link" />
+      <child link="scan1d_${prefix}" />
+      <origin xyz="${0.164 * cos(angle)} ${0.164 * sin(angle)} 0.06" rpy="0 ${PI*14/180} ${angle}"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="ir_sensor" params="prefix angle">
+    <link name="ir_${prefix}" />
+    <joint name="ir_${prefix}_joint" type="fixed">
+      <axis rpy="0 0 0" xyz="0 0 0" />
+      <parent link="body" />
+      <child link="ir_${prefix}" />
+      <origin xyz="${body_radius * cos(angle)} ${body_radius * sin(angle)} 0" rpy="0 0 ${angle}" />
+    </joint>
+
+    <gazebo reference="ir_${prefix}">
+      <sensor type="ray" name="ir_${prefix}_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>true</visualize>
+        <update_rate>20</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>10</samples>
+              <resolution>1</resolution>
+              <min_angle>-${PI / 36}</min_angle>
+              <max_angle>${PI / 36}</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.01</min>
+            <max>0.26</max>
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin name="gazebo_ros_ir_${prefix}_controller" filename="libgazebo_ros_range.so">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>20</updateRate>
+          <topicName>/ir/${prefix}</topicName>
+          <frameName>base_link</frameName>
+          <radiation>ir</radiation>
+          <fov>${PI/18}</fov>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="ir_wide_sensor" params="prefix angle">
+    <link name="ir_${prefix}" />
+    <joint name="ir_${prefix}_joint" type="fixed">
+      <axis rpy="0 0 0" xyz="0 0 0" />
+      <parent link="body" />
+      <child link="ir_${prefix}" />
+      <origin xyz="${(body_radius-0.05) * cos(angle)} ${(body_radius-0.05) * sin(angle)} 0" rpy="0 0 ${angle}" />
+    </joint>
+
+    <gazebo reference="ir_${prefix}">
+      <sensor type="ray" name="ir_${prefix}_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>true</visualize>
+        <update_rate>20</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>10</samples>
+              <resolution>1</resolution>
+              <min_angle>-${PI / 3}</min_angle>
+              <max_angle>${PI / 3}</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.08</min>
+            <max>0.09</max>
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin name="gazebo_ros_ir_${prefix}_controller" filename="libgazebo_ros_range.so">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>20</updateRate>
+          <topicName>/ir/${prefix}</topicName>
+          <frameName>base_link</frameName>
+          <radiation>ir</radiation>
+          <fov>${PI/18}</fov>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:wheel prefix="left" reflect="1" />
+  <xacro:wheel prefix="right" reflect="-1" />
+  <xacro:ir_sensor prefix="left" angle="${PI/2}" />
+  <xacro:ir_wide_sensor prefix="left_front" angle="${PI/4}" />
+  <xacro:ir_wide_sensor prefix="front" angle="0" />
+  <xacro:ir_wide_sensor prefix="right_front" angle="-${PI/4}" />
+  <xacro:ir_sensor prefix="right" angle="-${PI/2}" />
+
+  <xacro:ir_recevier prefix="fl" angle="0.06" color="Gazebo/Red" />
+  <xacro:ir_recevier prefix="fr" angle="-0.06" color="Gazebo/Green" />
+  <xacro:ir_recevier prefix="l" angle="${PI/2}" color="Gazebo/Blue" />
+  <xacro:ir_recevier prefix="r" angle="${-PI/2}" color="Gazebo/Purple" />
+
+  <xacro:scan1d prefix="left" angle="${PI*21/180}"/>
+  <xacro:scan1d prefix="right" angle="${-PI*21/180}"/>
+
+  <xacro:include filename="lidar.xacro" />
+  <joint name="lidar_joint" type="fixed">
+    <parent link="body" />
+    <child link="lidar_link" />
+    <origin xyz="0.043 0 ${body_height/2}" />
+  </joint>
+
+  <!--xacro:include filename="imu.xacro" /-->
+  <link name="imu_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.001" radius="0.001" />
+      </geometry>
+      <material name="white" />
+    </visual>
+  </link>
+
+  <joint name="imu_joint" type="fixed">
+    <parent link="body" />
+    <child link="imu_link" />
+    <origin xyz="0 0 0" />
+  </joint>
+
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>/imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>50.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+  <!-- Gazebo plugin for ROS Control -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+      <legacyModeNS>true</legacyModeNS>
+    </plugin>
+  </gazebo>
+</robot>

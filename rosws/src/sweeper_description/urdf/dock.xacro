@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<robot xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:xacro="http://ros.org/wiki/xacro" name="dock">
+
+    <xacro:property name="DOCK_WIDTH" value="0.18" />
+    <xacro:property name="DOCK_HEIGHT" value="0.08" />
+    <xacro:property name="DOCK_THICKNESS" value="0.06" />
+    <xacro:property name="DOCK_PLANE_L" value="0.16" />
+    <xacro:property name="DOCK_PLANE_H" value="0.01" />
+    <xacro:macro name="box_inertial" params="mass x y z">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="${mass}"/>
+            <inertia ixx="${mass * (x*x + z*z) / 12}" ixy="0.0" ixz="0.0" iyy="${mass * (z*z + y*y) / 12}" iyz="0.0" izz="${mass * (x*x + y*y) / 12}"/>
+        </inertial>
+    </xacro:macro>
+    <link name="bottom">
+        <xacro:box_inertial mass="0.5" x="${DOCK_WIDTH}" y="${DOCK_PLANE_L}" z="${DOCK_PLANE_H}"/>
+        <collision>
+            <origin xyz="0 0 ${DOCK_PLANE_H/2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${DOCK_WIDTH} ${DOCK_PLANE_L} ${DOCK_PLANE_H}"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 ${DOCK_PLANE_H/2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${DOCK_WIDTH} ${DOCK_PLANE_L} ${DOCK_PLANE_H}"/>
+            </geometry>
+        </visual>
+    </link>
+    <link name="base">
+        <xacro:box_inertial mass="0.3" x="${DOCK_WIDTH}" y="${DOCK_THICKNESS}" z="${DOCK_HEIGHT}"/>
+        <visual>
+            <origin xyz="0.0 0.0 ${DOCK_HEIGHT/2}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="${DOCK_WIDTH} ${DOCK_THICKNESS} ${DOCK_HEIGHT}"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 ${DOCK_HEIGHT/2}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="${DOCK_WIDTH} ${DOCK_THICKNESS} ${DOCK_HEIGHT}"/>
+            </geometry>
+        </collision>
+    </link>
+    <link name="dock_left">
+        <visual>
+            <geometry>
+                <sphere radius="0.005"/>
+            </geometry>
+        </visual>
+    </link>
+    <link name="dock_right">
+        <visual>
+            <geometry>
+                <sphere radius="0.005"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="jonit_left" type="fixed">
+        <origin xyz="-0.005 -0.03 0.06" rpy="0.0 0.0 -1.57"/>
+        <parent link="base"/>
+        <child link="dock_left"/>
+    </joint>
+    <joint name="joint_right" type="fixed">
+        <origin xyz="0.005 -0.03 0.06" rpy="0.0 0.0 -1.57"/>
+        <parent link="base"/>
+        <child link="dock_right"/>
+    </joint>
+
+    <gazebo reference="dock_left">
+        <sensor name="ir_left" type="camera">
+            <camera>
+                <clip>
+                    <near>0.02</near>
+                    <far>2.5</far>
+                </clip>
+                <image>
+                    <width>20</width>
+                    <height>20</height>
+                </image>
+                <horizontal_fov>0.02</horizontal_fov>
+                <aspect_ratio>1</aspect_ratio>
+            </camera>
+            <visualize>true</visualize>
+            <always_on>true</always_on>
+            <update_rate>10</update_rate>
+            <topic>dockir/A3</topic>
+            <plugin name="camera_l" filename="libgazebo_ros_camera.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>10.0</updateRate>
+                <cameraName>dock/left</cameraName>
+                <imageTopicName>image_raw</imageTopicName>
+                <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                <frameName>dock_left</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="dock_right">
+        <sensor name="ir_right" type="camera">
+            <camera>
+                <clip>
+                    <near>0.02</near>
+                    <far>2.5</far>
+                </clip>
+                <image>
+                    <width>20</width>
+                    <height>20</height>
+                </image>
+                <horizontal_fov>0.02</horizontal_fov>
+                <aspect_ratio>1</aspect_ratio>
+            </camera>
+            <visualize>false</visualize>
+            <always_on>true</always_on>
+            <update_rate>10</update_rate>
+            <topic>dockir/A3</topic>
+            <plugin name="camera_r" filename="libgazebo_ros_camera.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>10.0</updateRate>
+                <cameraName>dock/right</cameraName>
+                <imageTopicName>image_raw</imageTopicName>
+                <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                <frameName>dock_right</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="bottom">
+        <mu1>20.0</mu1>
+        <mu2>10.0</mu2>
+        <kp>1000.0</kp>
+        <kd>1.0</kd>
+        <minDepth>0.001</minDepth>
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <joint name="joint_name" type="fixed">
+        <origin xyz="0.0 ${DOCK_PLANE_L/2 - DOCK_THICKNESS/2} 0" rpy="0.0 0.0 0.0"/>
+        <parent link="bottom"/>
+        <child link="base"/>
+    </joint>
+</robot>

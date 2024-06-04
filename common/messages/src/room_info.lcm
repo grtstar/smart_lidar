@@ -1,0 +1,11 @@
+package mars_message;
+
+struct RoomInfo 
+{
+    GridMap roomMap;
+    int32_t doorCount;
+    DoorInfo doors[doorCount];
+    int32_t roomNum;
+    RoomPropety roomPropeties[roomNum];
+    int32_t cleanOrder[roomNum];
+}

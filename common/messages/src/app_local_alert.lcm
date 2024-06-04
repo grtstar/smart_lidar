@@ -1,0 +1,9 @@
+package mars_message;
+
+struct AppLocalAlert
+{
+    int8_t verison;
+    int8_t timeZone;
+    int8_t number;
+    TimedTaskInfo timedTaskInfo[number];
+}

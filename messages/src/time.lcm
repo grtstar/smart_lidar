@@ -1,0 +1,8 @@
+package mars_message;
+
+struct Time
+{
+    int8_t hour;
+    int8_t minute;
+    int8_t second;
+}

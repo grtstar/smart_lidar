@@ -1,0 +1,11 @@
+prefix=/home/grt/r329/App/common_arm
+exec_prefix=/home/grt/r329/App/common_arm
+libdir=/home/grt/r329/App/common_arm/lib
+includedir=/home/grt/r329/App/common_arm/include
+
+Name: Protocol Buffers
+Description: Google's Data Interchange Format
+Version: 3.4.1
+Libs: -L${libdir} -lprotobuf -lpthread
+Cflags: -I${includedir} -lpthread
+Conflicts: protobuf-lite

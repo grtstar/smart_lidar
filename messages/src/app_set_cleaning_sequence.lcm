@@ -1,0 +1,8 @@
+package mars_message;
+
+struct AppSetCleaningSequence
+{
+    int8_t version;
+    int8_t count;
+    int8_t roomId[count];
+}

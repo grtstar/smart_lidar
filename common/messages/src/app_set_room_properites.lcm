@@ -1,0 +1,12 @@
+package mars_message;
+
+struct AppSetRoomProperties
+{
+    int8_t version;
+    int8_t count;
+    int8_t roomId[count];
+    int32_t fan[count];
+    int32_t waterLevel[count];
+    int8_t yMop[count];
+    int8_t cleanRepeat[count];
+}

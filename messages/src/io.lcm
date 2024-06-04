@@ -1,0 +1,11 @@
+package mars_message;
+
+struct IO
+{
+    int8_t ioWaterTank;
+    int8_t ioCleanWaterFull;
+    int8_t ioCleanWaterEmpty;
+    int8_t ioDusbox;
+    int8_t ioSewageFull;
+    int8_t ioLiftFinish;
+}

@@ -1,0 +1,7 @@
+package mars_message;
+
+struct Ranges
+{
+    int8_t count;
+    int16_t rangeMM[count];
+}

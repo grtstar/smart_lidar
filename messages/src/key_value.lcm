@@ -1,0 +1,7 @@
+package mars_message;
+
+struct KeyValue
+{
+    string key;
+    int32_t value;
+}

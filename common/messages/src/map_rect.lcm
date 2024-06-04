@@ -1,0 +1,9 @@
+package mars_message;
+
+struct MapRect
+{
+    int32_t validNum;
+    float w;
+    float h;
+    Pose origin;
+}

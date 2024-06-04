@@ -1,0 +1,8 @@
+package mars_message;
+
+struct Twist
+{
+    int64_t  timestampMs;
+    Vector3 linearVelocity;
+    Vector3 angularVelocity;
+}

@@ -1,0 +1,6 @@
+package mars_message;
+
+struct Enum
+{
+    int32_t value;
+}

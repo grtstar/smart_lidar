@@ -1,0 +1,17 @@
+package mars_message;
+
+struct LaserScan
+{
+    int64_t timestampMs;
+    float   angleMin;
+    float   angleMax;
+    float   angleIncrement;
+    float   timeIncrement;
+    float   scanTime;
+    float   rangeMin;
+    float   rangeMax;
+    
+    int32_t count;
+    float   ranges[count];
+    float   intensities[count];
+}

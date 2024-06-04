@@ -1,0 +1,11 @@
+package mars_message;
+
+struct AppRestrictedArea
+{
+    int8_t version;
+    int8_t count;
+    int8_t mode[count];
+    int8_t type[count];
+    Polygon polygon[count];
+    string name[count];
+}

@@ -1,0 +1,12 @@
+package mars_message;
+
+struct AppNotDisturbTime
+{
+    int8_t version;
+    int8_t onoff;
+    int8_t timeZone;
+    int16_t starTime;
+    int8_t startDay;
+    int16_t endTime;
+    int8_t endDay;
+}

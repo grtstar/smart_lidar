@@ -1,0 +1,9 @@
+package mars_message;
+
+struct AppPartitionMerge
+{
+    int8_t version;
+    int8_t count;
+    int8_t roomId[count];
+    int8_t ret;
+}

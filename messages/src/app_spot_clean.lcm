@@ -1,0 +1,11 @@
+package mars_message;
+
+struct AppSpotClean
+{
+    int8_t version;
+    Point spot;
+    int8_t mode;
+    int8_t suction;
+    int8_t cistern;
+    int8_t cleanRepeat;
+}

@@ -1,0 +1,4 @@
+toolchain/libexec/gcc/aarch64-openwrt-linux-gnu/6.4.1/cc1 filter=lfs diff=lfs merge=lfs -text
+toolchain/libexec/gcc/aarch64-openwrt-linux-gnu/6.4.1/lto1 filter=lfs diff=lfs merge=lfs -text
+toolchain/libexec/gcc/aarch64-openwrt-linux-gnu/6.4.1/cc1plus filter=lfs diff=lfs merge=lfs -text
+toolchain/libexec/gcc/aarch64-openwrt-linux-gnu/6.4.1/f951 filter=lfs diff=lfs merge=lfs -text

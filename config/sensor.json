@@ -1,0 +1,57 @@
+[
+    {
+        "TopicName":"Scan",
+        "sensorSource":0,
+        "sensorType":"SENSOR_POINTCLOUD2",
+        "obsType":["OBS_EDGE"],
+        "sensorPose":{"sensorX":0.0, "sensorY":0, "sensorZ":0.10, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0}
+    },
+    {
+        "TopicName":"Mbump",
+        "sensorSource":1,
+        "sensorType":"SENSOR_BUMPER",
+        "obsType":["OBS_CONTACT"],
+        "sensorPose":{"sensorX":0, "sensorY":0, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0},
+        "InvisibleConfiguration":
+        {
+            "BumperConfig":
+            [
+                {"mask":1, "sensorPose":{"sensorR":0.15, "sensorTheta":-60, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0}},
+                {"mask":2, "sensorPose":{"sensorR":0.15, "sensorTheta":60, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0}},
+                {"mask":3, "sensorPose":{"sensorR":0.15, "sensorTheta":0, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0}}
+            ]
+        }
+    },
+    {
+        "TopicName":"Mcliff",
+        "sensorSource":2,
+        "sensorType":"SENSOR_BUMPER",
+        "obsType":["OBS_DANGER"],
+        "sensorPose":{"sensorX":0, "sensorY":0, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0},
+        "InvisibleConfiguration":
+        {
+            "BumperConfig":
+            [
+                {"mask":1, "sensorPose":{"sensorR":0.15, "sensorTheta":-60, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0}},
+                {"mask":2, "sensorPose":{"sensorR":0.15, "sensorTheta":60, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0}},
+                {"mask":4, "sensorPose":{"sensorR":0.15, "sensorTheta":0, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0}},
+                {"mask":32, "sensorPose":{"sensorR":0.15, "sensorTheta":0, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0}},
+                {"mask":64, "sensorPose":{"sensorR":0.15, "sensorTheta":0, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0}}
+            ]
+        }
+    },
+    {
+        "TopicName":"Odom",
+        "sensorSource":0,
+        "sensorType":"SENSOR_ODOM",
+        "obsType":["OBS_NONE"],
+        "sensorPose":{"sensorX":0, "sensorY":0, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0}
+    },
+    {
+        "TopicName":"REALODOM",
+        "sensorSource":0,
+        "sensorType":"SENSOR_REALODOM",
+        "obsType":["OBS_NONE"],
+        "sensorPose":{"sensorX":0, "sensorY":0, "sensorZ":0, "sensorRoll":0, "sensorPicth":0, "sensorYaw":0}
+    }
+]

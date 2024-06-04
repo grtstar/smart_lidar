@@ -1,0 +1,6 @@
+package mars_message;
+
+struct Debug
+{
+    string cmd;
+}

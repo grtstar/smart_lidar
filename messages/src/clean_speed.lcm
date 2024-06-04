@@ -1,0 +1,7 @@
+package mars_message;
+
+struct CleanSpeed
+{
+    float zigzagV;
+    float aroundV;
+}

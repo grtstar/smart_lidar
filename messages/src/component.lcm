@@ -1,0 +1,7 @@
+package mars_message;
+
+struct Component
+{
+    string name;
+    int32_t value;
+}

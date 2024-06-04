@@ -1,0 +1,17 @@
+package mars_message;
+
+struct TimedTaskInfo
+{
+    int8_t valid;
+    int8_t weekDayMask;
+    int16_t time;
+    int16_t mapId;
+    int8_t roomN;
+    int8_t roomId[roomN];
+    int8_t zoomN;
+    int32_t zoodId[zoomN];
+    int8_t cleanMode;
+    int8_t fan;
+    int8_t water;
+    int8_t cleanRepeat;
+}

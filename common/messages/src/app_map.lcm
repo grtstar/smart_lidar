@@ -1,0 +1,20 @@
+  package mars_message;
+
+   struct AppMap
+   {
+        int8_t version;
+        int16_t mapId;
+        int8_t type;
+        int16_t width;
+        int16_t height;
+        Pose    origin;
+        float   resolution;
+        Pose   charger;
+        int32_t pointCount;
+        int8_t  data[pointCount];
+        int16_t roomNum;
+        AppRoomProperties roomPropeties[roomNum];
+        string roomName[roomNum];
+        Polygon roomPolygon[roomNum];
+   }
+   

@@ -1,0 +1,9 @@
+package mars_message;
+
+struct PointCloud
+{
+    int64_t timestampMs;
+    int32_t count;
+    Point   points[count];
+    float   intensities[count];
+}

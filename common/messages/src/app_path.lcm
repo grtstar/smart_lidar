@@ -1,0 +1,10 @@
+package mars_message;
+
+struct AppPath
+{
+    int16_t id;
+    int16_t count;
+    Point points[count];
+    int8_t pointType[count];
+    float degree;
+}

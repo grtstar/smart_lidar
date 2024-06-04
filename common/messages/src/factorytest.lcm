@@ -1,0 +1,12 @@
+package mars_message;
+
+struct FactoryTestConfig
+{
+    int32_t  gtSpeedMinLimit;
+    int32_t  batteryVolMaxLimit;
+    int32_t  batteryVolMinLimit;
+    int32_t  batteryCurrentMaxLimit;
+    int32_t  batteryCurrentMinLimit;
+    int32_t  waterBumpMinLimit;
+    int32_t  airBumpMinLimit;
+}

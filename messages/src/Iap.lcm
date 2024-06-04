@@ -1,0 +1,9 @@
+package mars_message;
+
+struct Iap
+{
+    int16_t  packNum;
+    int16_t  count;
+    int8_t code[count];
+    int8_t crc;
+} 

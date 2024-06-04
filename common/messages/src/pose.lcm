@@ -1,0 +1,7 @@
+package mars_message;
+
+struct Pose
+{
+    Vector3 pose;
+    Quaternion orientation;
+}

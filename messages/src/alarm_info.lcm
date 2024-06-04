@@ -1,0 +1,8 @@
+package mars_message;
+
+struct AlarmInfo
+{
+   string appName;
+   string logType;
+   string logValue;
+}

@@ -1,0 +1,7 @@
+package mars_message;
+
+struct Path
+{
+    int16_t count;
+    Point points[count];
+}

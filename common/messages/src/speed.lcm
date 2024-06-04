@@ -1,0 +1,7 @@
+package mars_message;
+
+struct Speed
+{
+    float linear;
+    float angular;
+}

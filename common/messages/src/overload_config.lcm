@@ -1,0 +1,14 @@
+package mars_message;
+
+struct OverloadConfig
+{
+    int16_t wheel;
+    int16_t sideBrush;
+    int16_t mainBrush;
+    int16_t rollBrush;
+    int16_t liftMotor;
+    int16_t waterPump;
+    int16_t sewagePump;
+    int16_t airPump;
+    int16_t fanPump;
+}

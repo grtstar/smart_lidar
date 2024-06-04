@@ -1,0 +1,17 @@
+package mars_message;
+
+struct RoomPropety
+{
+    int32_t roomNo;
+    MapRect roomArea;
+    string roomName;
+    int32_t cleanOrder;
+    int32_t cleanRepeat;
+    int32_t mopRepeat;
+    int32_t colorOrder;
+    int32_t donotSweep;
+    int32_t donotMop;
+    int32_t fanPower;
+    int32_t waterLevel;
+    int32_t enableYMop;
+}

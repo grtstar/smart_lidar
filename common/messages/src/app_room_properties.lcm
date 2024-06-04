@@ -1,0 +1,15 @@
+package mars_message;
+
+struct AppRoomProperties
+{
+    int16_t roomId;
+    int16_t cleanOrder;
+    int16_t cleanRepeart;
+    int16_t mopRepeat;
+    int8_t colorOrder;
+    int8_t donotSweep;
+    int8_t donotMop;
+    int32_t fanPower;
+    int32_t waterLevel;
+    int8_t enableYMop;
+}

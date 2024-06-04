@@ -1,0 +1,7 @@
+package mars_message;
+
+struct Segment
+{
+    Point begin;
+    Point end;
+}

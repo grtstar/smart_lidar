@@ -1,0 +1,7 @@
+package mars_message;
+
+struct Voice
+{
+    int64_t    voice;
+    int32_t    param;
+}

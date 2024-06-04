@@ -1,0 +1,8 @@
+package mars_message;
+
+struct Point
+{
+    float x;
+    float y;
+    float z;
+}

@@ -1,0 +1,7 @@
+package mars_message;
+
+struct VirtualWall
+{
+    int8_t count;
+    Segment wall[count];
+}

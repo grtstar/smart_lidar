@@ -1,0 +1,10 @@
+package mars_message;
+
+struct AppVirtualWall
+{
+    int8_t version;
+    int8_t count;
+    int8_t mode[count];
+    Segment wall[count];
+
+}

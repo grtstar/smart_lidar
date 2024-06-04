@@ -1,0 +1,35 @@
+package mars_message;
+
+struct SweeperStatus
+{
+    RobotStatus mcuStatus;
+    int32_t runningState;
+    int32_t pauseStatus;
+    int32_t chargeStatus;
+    int32_t cleanMode;
+    int32_t cleanStatus;
+    int32_t cleanTime;
+    float cleanArea;
+    int32_t suctionPower;
+    int32_t cistern;
+    int32_t wipe;
+    int32_t manualDirection;
+    int32_t edgeBrushLife;
+    int32_t rollBrushLife;
+    int32_t filterLife;
+    int32_t ragLife;
+    int32_t donotDisturb;
+    int32_t volume;
+    int32_t cleanAreaTotal;
+    int32_t cleanCountTotal;
+    int32_t cleanTimeTotal;
+    int32_t language;
+    int32_t dustCollectionNum;
+    int32_t dustCollectionSwitch;
+    int32_t mapState;
+    int32_t esimateArea;
+    int32_t carpetCleanPefer;
+    int32_t autoBoost;
+    int32_t childLock;
+    int32_t yMop;
+} 

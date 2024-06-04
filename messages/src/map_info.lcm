@@ -1,0 +1,11 @@
+package mars_message;
+
+struct MapInfo
+{
+    int32_t createTime;
+    int32_t mapSign;
+    int32_t editTime;
+    string name;
+    int8_t isFormalMap;
+    int8_t isSaveToFlash;
+}

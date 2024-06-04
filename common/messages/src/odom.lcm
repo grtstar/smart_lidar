@@ -1,0 +1,9 @@
+package mars_message;
+
+struct Odometry
+{
+    int64_t  timestampMs;
+    Pose    pose;
+    Vector3 linearVelocity;
+    Vector3 angularVelocity;
+}

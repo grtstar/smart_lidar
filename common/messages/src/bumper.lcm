@@ -1,0 +1,8 @@
+package mars_message;
+
+struct Bumper
+{
+    int64_t timestampMs;
+    int8_t  count;
+    int32_t mask;
+}

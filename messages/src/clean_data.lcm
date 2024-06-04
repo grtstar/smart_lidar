@@ -1,0 +1,10 @@
+package mars_message;
+
+struct CleanData
+{
+    float cleanAreaM2;
+    float houseAreaM2;
+    int32_t cleanTimeSec;
+    float cleanTotalAreaM2;
+    int32_t cleanTotalTimeSec;
+}

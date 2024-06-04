@@ -1,0 +1,7 @@
+package mars_message;
+
+struct Event
+{
+    int32_t event;
+    int32_t param;
+}

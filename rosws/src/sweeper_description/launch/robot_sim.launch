@@ -1,0 +1,25 @@
+<launch>
+  <arg name="model" default="$(find sweeper_description)/urdf/c1.xacro"/>
+  <arg name="dock" default="$(find sweeper_description)/urdf/dock.xacro"/>
+  <!-- <param name="dock_description" textfile="$(find sweeper_description)/urdf/dock.sdf"/> -->
+  <param name="dock_description" command="$(find xacro)/xacro --inorder $(arg dock)" />
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
+  <arg name="rvizconfig" default="$(find sweeper_description)/rviz/urdf.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+        args="-unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
+  <node name="urdf_spawner2" pkg="gazebo_ros" type="spawn_model"
+        args="-x 1.0 -Y -1.57 -unpause -urdf -model dock -param dock_description" respawn="false" output="screen" />
+  <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+  </node>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+  <node name="dock" pkg="dock" type="dock_node" output="screen"/>
+
+  <node name="lcm2ros" pkg="lcm2ros" type="lcm2ros.py" output="screen"/>
+  <node name="ros2lcm" pkg="ros2lcm" type="ros2lcm.py" output="screen"/>
+</launch>

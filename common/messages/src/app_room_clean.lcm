@@ -1,0 +1,9 @@
+package mars_message;
+
+struct AppRoomClean
+{
+    int8_t version;
+    int8_t cleanRepeat;
+    int8_t count;
+    int8_t id[count];
+}

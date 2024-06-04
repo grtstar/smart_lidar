@@ -1,0 +1,10 @@
+package mars_message;
+
+struct Coder
+{
+    int64_t timestampMs;
+    int32_t coderL;
+    int32_t coderR;
+    int16_t coderLPerSec;
+    int16_t coderRPerSec;
+}

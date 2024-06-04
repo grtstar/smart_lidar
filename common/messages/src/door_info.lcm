@@ -1,0 +1,9 @@
+package mars_message;
+
+struct DoorInfo 
+{
+    Point _1;
+    Point _2;
+    int32_t minId;
+    int32_t maxId;
+}

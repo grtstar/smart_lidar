@@ -1,0 +1,97 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="Dock">
+    <static>true</static>
+    <link name="base">
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0.01</ixy>
+          <ixz>0.01</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0.01</iyz>
+          <izz>0.01</izz>
+        </inertia>
+        <mass>1</mass>
+      </inertial>
+      <collision name="base_collision">
+        <pose>0 0 0.04 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.18 0.06 0.08</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="base_visual">
+        <pose>0 0 0.04 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.18 0.06 0.08</size>
+          </box>
+        </geometry>
+      </visual>
+      <collision name="bottom_collision">
+        <pose>0 0.08 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.18 0.10 0.004</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="bottom_visual">
+        <pose>0 0.08 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.18 0.10 0.004</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <link name="camera_left">
+      <pose>0.005 0.03 0.06 0 0 1.57</pose>
+      <visual name="cl">
+        <geometry>
+          <sphere>
+            <radius>.005</radius>
+          </sphere>
+        </geometry>
+      </visual>
+      <sensor name="ir_left" type="logical_camera">
+        <logical_camera>
+          <near>0.02</near>
+          <far>2.5</far>
+          <horizontal_fov>0.02</horizontal_fov>
+          <aspect_ratio>1</aspect_ratio>
+        </logical_camera>
+        <visualize>true</visualize>
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>
+        <topic>dockir/A3</topic>
+      </sensor>
+    </link>
+    <link name="camera_right">
+      <pose>-0.005 0.03 0.06 0 0 1.57</pose>
+      <visual name="cr">
+        <geometry>
+          <sphere>
+            <radius>.005</radius>
+          </sphere>
+        </geometry>
+      </visual>
+      <sensor name="ir_right" type="logical_camera">
+        <logical_camera>
+          <near>0.02</near>
+          <far>2.5</far>
+          <horizontal_fov>0.02</horizontal_fov>
+          <aspect_ratio>1</aspect_ratio>
+        </logical_camera>
+        <visualize>true</visualize>
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>
+        <topic>dockir/A4</topic>
+      </sensor>
+    </link>
+  </model>
+</sdf>

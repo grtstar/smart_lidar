@@ -1,0 +1,16 @@
+package mars_message;
+
+struct Order
+{
+    int8_t orderId;
+    int32_t sign;
+    int8_t valid;
+    Time time;
+    int8_t mode;
+    int8_t sweepPower;
+    int8_t mopPower;
+    int8_t componentCount;
+    Component components[componentCount];
+    int8_t roomCount;
+    int8_t rooms[roomCount];
+}

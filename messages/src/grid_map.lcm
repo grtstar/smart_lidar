@@ -1,0 +1,14 @@
+  package mars_message;
+
+   struct GridMap
+   {
+        int64_t timestampMs;
+        int64_t mapLoadTime;
+        float   resolution;
+        int32_t width;
+        int32_t height;
+        Pose    origin;
+        int32_t pointCount;
+        int8_t  data[pointCount];
+   }
+   

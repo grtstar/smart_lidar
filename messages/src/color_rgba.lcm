@@ -1,0 +1,9 @@
+package mars_message;
+
+struct ColorRGBA
+{
+    float r;
+    float g;
+    float b;
+    float a;
+}

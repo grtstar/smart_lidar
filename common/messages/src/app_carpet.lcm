@@ -1,0 +1,9 @@
+package mars_message;
+
+struct AppCarpet
+{
+    int8_t version;
+    int8_t count;
+    int8_t type[count];
+    Polygon carpet[count];
+}

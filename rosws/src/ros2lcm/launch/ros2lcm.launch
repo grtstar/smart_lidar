@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="ros2lcm" type="ros2lcm.py" output="screen"/>
+</launch>

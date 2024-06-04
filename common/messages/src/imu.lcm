@@ -1,0 +1,12 @@
+package mars_message;
+
+struct Imu
+{
+    int64_t     timestampMs;
+    Quaternion  orientation;
+    double      orientationCovariance[9];
+    Vector3     angularVelocity;
+    double      angularVelocityCovariance[9];
+    Vector3     linearAcceleraion;
+    double      linearAcceleraionCovariance[9];
+}

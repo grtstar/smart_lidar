@@ -1,0 +1,7 @@
+package mars_message;
+
+struct Shell
+{
+    int8_t count;
+    int8_t code[count];
+} 

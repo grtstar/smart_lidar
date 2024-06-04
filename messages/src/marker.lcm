@@ -1,0 +1,23 @@
+package mars_message;
+
+struct Marker
+{
+    int64_t     timestampMs;
+    string      ns;
+    int32_t     id;
+    int32_t     type;
+    int32_t     action;
+    Pose        pose;
+    Vector3     scale;
+    ColorRGBA   color;
+    int32_t     lifetime;
+    int32_t     frame_locked;
+
+    int32_t     pointCount;
+    Point       points[pointCount];
+    ColorRGBA   colors[pointCount];
+
+    string      text;
+    string      mesh_resource;
+    int32_t     mesh_use_embeded_materials;
+}

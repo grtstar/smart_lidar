@@ -1,0 +1,15 @@
+package mars_message;
+
+struct AppCleanInfo
+{
+    int32_t cleanTimeSecond;
+    float cleanArea;
+    int32_t cleanTimeTotalSecond;
+    float cleanAreaTotal;
+    int32_t cleanCountTotal;
+    float esimateArea;
+    float carpetArea;
+    int32_t numberOfTasksCompleted;
+    int32_t sweepTimeTotalSecond;
+    int32_t washTimeTotalSecond;
+}

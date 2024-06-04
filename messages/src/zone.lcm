@@ -1,0 +1,8 @@
+package mars_message;
+
+struct Zone
+{
+    int8_t count;
+    Polygon polygon[count];
+    string name[count];
+}

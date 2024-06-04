@@ -1,0 +1,7 @@
+package mars_message;
+
+struct DevicePower
+{
+    string deviceName;
+    int32_t power;
+}

@@ -1,0 +1,9 @@
+package mars_message;
+
+struct ObsAvoidance
+{
+    int64_t timestampMs;
+    int32_t count;
+    double angles[count];
+    double ranges[count];
+}

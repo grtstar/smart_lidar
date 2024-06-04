@@ -1,0 +1,10 @@
+package mars_message;
+
+struct IrCode2
+{
+    int32_t    timestampMs;
+    int32_t    code0;
+    int32_t    code1;
+    int32_t    code2;
+    int32_t    code3;
+}

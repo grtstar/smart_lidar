@@ -1,0 +1,18 @@
+package mars_message;
+
+struct ClearComponent
+{
+    int8_t  reply;
+    int16_t fanRpm;
+    int16_t gtRpm;
+    int16_t gtOffTime;
+    int16_t gtOnDegree;
+    int16_t gtCycle;
+    int16_t gtCleanDegree;
+    int16_t rbrushRpm;
+    int16_t mbrushRpm;
+    int16_t pumpOnTime;
+    int16_t pumpOffTime;
+    int16_t pump2OnTime;
+    int16_t pump2OffTime;
+} 
