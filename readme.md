@@ -68,7 +68,7 @@ sudo apt install git
 ##### 4. 创建文件夹并使用 git 克隆本工程
 从 github 克隆
 ```
-
+https://github.com/grtstar/smart_lidar.git
 ```
 若无法访问 github 可从 gitee 克隆
 ```
