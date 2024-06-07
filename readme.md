@@ -43,7 +43,15 @@ adb shell
 可使用 adb 登录到 SmartLidar 中的 Linux 系统
 登录后可使用 wifi_connect_ap_test 来连接路由器
 ### 4. 开启雷达
-登录到系统后运行
+登录到系统后进入目录
+ ```
+ cd /root/r329
+ ```
+ 配置运行环境，重新登录 ssh 或 adb shell 后，执行程序前均需要执行配置环境指令
+ ```
+ source ./runon329.sh   
+ ```
+ 开启雷达
  ```
  ./sendevt Power LPWR 1
  ``` 
