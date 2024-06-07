@@ -18,7 +18,7 @@ SmartLidar 是集成了激光雷达传感器和算法控制板的一体化智能
 ```
 ssh root@192.168.4.1
 ```
-远程登录到 SmartLidar 中的 Linux 系统，密码默认为 root
+远程登录到 SmartLidar 中的 Linux 系统，密码默认为 XDROBOT
 
 登录到系统后，可使用以下命令将 SmartLidar 连接到 WiFi 路由器上，这样 PC 可以在同一个局域网中使用 ssh 登录到 SmartLidar
 ```
@@ -57,6 +57,25 @@ adb shell
  ``` 
  将会开启雷达，SmartLidar 默认配置为无需里程计可直接手持雷达建图。开启雷达后，打开 rviz 应当可以看到地图显示。
  手持雷达移动建图时，应当尽量保持平稳，避免行走速度过快，或角速度过快;保持雷达水平，避免水平倾角发生太大的变化。
+
+如果已经完成底盘控制的对接，可以使用里程计信息建图，将有更好的建图效果。
+进入配置目录
+```
+cd /root/r329/configuration_files
+```
+备份当前配置文件
+```
+mv mapping.lua mapping_noodom.lua
+```
+使用 odom 配置文件
+```
+mv mapping_odom.lua mapping.lua
+```
+重启或重新上电
+```
+reboot
+```
+
 
 ### 5. 软件环境安装
 #### 5.1 安装在 Ubuntu 上
