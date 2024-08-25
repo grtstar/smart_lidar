@@ -1,7 +1,7 @@
-prefix=/home/grt/r329/App/common
-exec_prefix=/home/grt/r329/App/common
-libdir=/home/grt/r329/App/common/lib
-includedir=/home/grt/r329/App/common/include
+prefix=/home/zbw/c1/v6/linux_app/common
+exec_prefix=/home/zbw/c1/v6/linux_app/common
+libdir=/home/zbw/c1/v6/linux_app/common/lib
+includedir=/home/zbw/c1/v6/linux_app/common/include
 
 Name: Protocol Buffers
 Description: Google's Data Interchange Format

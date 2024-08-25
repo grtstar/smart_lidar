@@ -30,6 +30,7 @@ from .BlueToothInfo import BlueToothInfo
 from .BlueToothState import BlueToothState
 from .MacAddrCode import MacAddrCode
 from .Bumper import Bumper
+from .CleanComponents import CleanComponents
 from .CleanData import CleanData
 from .CleanSpeed import CleanSpeed
 from .ClearComponent import ClearComponent

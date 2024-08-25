@@ -1,7 +1,7 @@
-prefix=/home/grt/r329/App/common
-exec_prefix=/home/grt/r329/App/common
-libdir=/home/grt/r329/App/common/lib
-includedir=/home/grt/r329/App/common/include
+prefix=/home/grt/projects/robot/common
+exec_prefix=/home/grt/projects/robot/common
+libdir=/home/grt/projects/robot/common/lib
+includedir=/home/grt/projects/robot/common/include
 
 Name: Protocol Buffers
 Description: Google's Data Interchange Format

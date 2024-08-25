@@ -1,4 +1,4 @@
-prefix=/home/grt/ls/reality/r329/common/x86
+prefix=/home/grt/ls/simulator/common
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

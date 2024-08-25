@@ -1,0 +1,15 @@
+<launch>
+  <arg name="model" default="$(find lidarcar_description)/urdf/lidarcar.xacro"/>
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
+  <arg name="rvizconfig" default="$(find lidarcar_description)/rviz/urdf.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+  </node>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+  <node name="lcm2ros" pkg="lcm2ros" type="lcm2ros.py" output="screen"/>
+  <node name="ros2lcm" pkg="ros2lcm" type="ros2lcm.py" output="screen"/>
+  <node name="lcm_tunnel" pkg="lcm_tunnel" type="lcm_tunnel.sh" output="screen"/>
+</launch>

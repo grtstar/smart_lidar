@@ -1,0 +1,58 @@
+#!/usr/bin/python
+import mars_message
+import inspect
+import json
+
+lcmd_auto_complete = '''
+_lcmd()  
+{  
+    COMPREPLY=()  
+    local cur=${COMP_WORDS[COMP_CWORD]};  
+    local cmd=${COMP_WORDS[COMP_CWORD-1]};  
+    case $cmd in  
+    'lcmd')  
+          COMPREPLY=( $(compgen -W '-h -p -m' -- $cur) ) ;;  
+    '*')  
+          ;;  
+    esac  
+    if [[ ${COMP_CWORD} -eq 3 ]]; then  
+          COMPREPLY=($(compgen -W '%s' -- $cur))  
+    fi  
+    if [[ "${COMP_WORDS[1]}" == "-p" && ${COMP_CWORD} -eq 4 ]]; then  
+    case $cmd in  
+          %s  
+    esac
+    fi
+    return 0  
+}  
+complete -F _lcmd lcmd
+'''
+
+def add_prefix(str):
+    return str.replace('"', '\\"')
+
+def gen_topic():
+    pass
+
+def var_name(var,all_var=locals()):
+    return [var_name for var_name in all_var if all_var[var_name] is var][0]
+
+def gen_type(module):
+    ac = ''
+    for name, class_ in inspect.getmembers(module, inspect.isclass):
+        ac += (var_name(module) + '.' +name)
+        ac += ' '
+    return ac
+def gen_value(module):
+    ac = ''
+    for name, class_ in inspect.getmembers(module, inspect.isclass):
+        ac += "'" + (var_name(module) + '.' +name) + "')\n"
+        ac += '''COMPREPLY="'\n'''
+        ac += add_prefix(json.dumps(eval('mars_message.' + name + '()').to_dict(), indent=4))
+        ac += '''\n'";;\n'''
+    return ac
+
+if __name__ == "__main__":
+    complete_sh = open('lcmd_auto_complete.sh', 'w')
+    print(lcmd_auto_complete %(gen_type(mars_message), (gen_value(mars_message))), file=complete_sh)
+    complete_sh.close()

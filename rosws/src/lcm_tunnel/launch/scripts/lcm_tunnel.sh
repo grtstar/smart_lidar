@@ -1,2 +1,2 @@
 #!/bin/bash
-lcm-tunnel 192.168.90.4
+lcm-tunnel -r "SCAN|OBS|DOORS|IMU|ODOM|MAP|PATH|AROUND|Marker|RECT|BLOCK|path|REFINE|CLEAN|LOCAL" 192.168.31.230
