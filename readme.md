@@ -104,6 +104,14 @@ https://github.com/grtstar/smart_lidar.git
 #### 5.2 使用 dock 安装
 敬请期待
 
+#### 5.3 编译工程
+在 pc 上打开终端，进入 smart_lidar 文件夹，输入
+```
+source rosenv.sh
+cd rosws
+catkin_make
+```
+
 ### 6. 使用 rviz 查看地图，并控制导航
 在 pc 上打开终端，进入 smart_lidar 文件夹，输入
 ```
@@ -112,7 +120,7 @@ source rosenv.sh
 进入 rosws 文件夹输入
 ```
 cd rosws
-./launch xxx.xxx.xxx.xxx
+./lidarcar xxx.xxx.xxx.xxx
 ```
 xxx.xxx.xxx.xxx 为 SmartLidar 的 ip 地址
 
