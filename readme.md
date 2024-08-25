@@ -119,6 +119,7 @@ source rosenv.sh
 ```
 进入 rosws 文件夹输入
 ```
+source devel/setup.sh
 cd rosws
 ./lidarcar xxx.xxx.xxx.xxx
 ```
