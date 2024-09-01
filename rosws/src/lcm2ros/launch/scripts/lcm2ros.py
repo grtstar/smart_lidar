@@ -342,6 +342,7 @@ lcm_mapping = [
     LcmMapping("LOCAL", "LOCAL",mars_message.Path, nav_msgs.msg.Path, "odom", mapping_path),
     LcmMapping("CLEANPATH", "CLEANPATH",mars_message.Path, nav_msgs.msg.Path, "odom", mapping_path),
     LcmMapping("LaserMarker", "LaserMarker",mars_message.Marker, visualization_msgs.msg.Marker, "lidar_link", mapping_marker),
+    LcmMapping("MarkerPlanTo", "MarkerPlanTo",mars_message.Marker, visualization_msgs.msg.Marker, "odom", mapping_marker),
     LcmMapping("DoorsMarker", "DoorsMarker",mars_message.Marker, visualization_msgs.msg.Marker, "odom", mapping_marker),
 ]
 

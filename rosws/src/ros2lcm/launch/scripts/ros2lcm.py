@@ -62,6 +62,13 @@ def mapping_poseP(pose : geometry_msgs.msg.PoseStamped, ros : RosMapping):
     msg.orientation = mapping_quaternion(pose.pose.orientation)
     lc.publish(ros.lcm_channel, msg.encode())
 
+def mapping_pointP(point : geometry_msgs.msg.PointStamped, ros : RosMapping):
+    msg = mars_message.Point()
+    msg.x = point.point.x
+    msg.y = point.point.y
+    msg.z = point.point.z
+    lc.publish(ros.lcm_channel, msg.encode())
+
 def mapping_pose(pose : geometry_msgs.msg.PoseWithCovariance):
     msg = mars_message.Pose()
     msg.pose = mapping_point(pose.pose.position)
@@ -247,6 +254,7 @@ def mapping_bumper3(edge : sensor_msgs.msg.Range, ros : RosMapping):
 
 ros_mappings = [
     RosMapping("/goal", mars_message.Pose, geometry_msgs.msg.PoseStamped, "odom", mapping_poseP, "/goal"),
+    RosMapping("/clicked_point", mars_message.Point, geometry_msgs.msg.PointStamped, "odom", mapping_pointP, "/clicked_point"),
     RosMapping("/scan", mars_message.LaserScan, sensor_msgs.msg.LaserScan, "base_link", mapping_laser, "vscan"),
     RosMapping("/scan", mars_message.PointCloud2, sensor_msgs.msg.LaserScan, "base_link", mapping_pointCloud2D, "SCAN"),
     RosMapping("/sweeper_drive_controller/odom", mars_message.Odometry, nav_msgs.msg.Odometry, "base_link", mapping_odom, "REALODOM"),
